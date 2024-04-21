@@ -1,13 +1,20 @@
+/*Programming: Min-Fang Chuang   Date: 2024/04/15
+ *Instruction: Chow-Sing Lin     Class: Program Design
+ *
+ *define a class "zipCode" that encode and decode five digit bar codes
+ */
 #include<iostream>
 #include<cstdlib>
 #include<cmath>
 #include<string>
 using namespace std;
 
+//define zipCode
 class zipCode {
 public:
 	zipCode(int);
 	zipCode(string);
+	zipCode();
 	void setZipcode(int);
 	void setZipcodeBar(string);
 	int getZipcode()const { return zipcode; }
@@ -23,13 +30,18 @@ private:
 };
 
 int main() {
+	//input as an integer   //input as a bar code string
 	zipCode code(98765), bar("110100101000101011000010011");
+
+	//display the result of encode or decode
 	cout << "First: \nzip code as an integer: " << code.getZipcode() << "\nzip code as a bar code string: " << code.getZipcodeBar() << endl;
 	cout << "\nSecond: \nzip code as an integer: " << bar.getZipcode() << "\nzip code as a bar code string: " << bar.getZipcodeBar() << endl;
 
 	system("pause");
 	return(0);
 }
+
+//constructor
 zipCode::zipCode(int code) :zipcode(code){
 	testcode();
 	encode();
@@ -38,7 +50,9 @@ zipCode::zipCode(string bar):zipcodeBar(bar) {
 	testbar();
 	decode();
 }
+zipCode::zipCode():zipcode(0){}
 
+//set the code
 void zipCode::setZipcode(int code) {
 	zipcode = code;
 	testcode();
@@ -50,8 +64,9 @@ void zipCode::setZipcodeBar(string bar) {
 	decode();
 }
 
+//test whether the code is allow
 void zipCode::testcode() {
-	if (zipcode >= 100000 ||zipcode <= 9999) {
+	if (zipcode >= 100000 ) {
 		cout << "Illegal zip code : five digits" << endl;
 		exit(1);
 	}
@@ -80,6 +95,8 @@ void zipCode::testbar() {
 		}
 	}
 }
+
+//encode to a bar code
 void zipCode::encode() {
 	zipcodeBar = "1";
 	int digit;
@@ -123,6 +140,8 @@ void zipCode::encode() {
 	}
 	zipcodeBar += "1";
 }
+
+//decode to integer code
 void zipCode::decode() {
 	zipcode = 0;
 	int digit;
