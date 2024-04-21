@@ -1,11 +1,19 @@
+/*Programming: Min-Fang Chuang   Date: 2024/04/01
+ *Instruction: Chow-Sing Lin     Class: Program Design
+ *
+ *Define a class "Pizza" to creat various pizza object
+ */
 #include<iostream>
+#include<cstdlib>
 using namespace std;
-#define MAX_PIZZA 18
-#define String Size[3] ={"Small", "Medium", "Large"}
+
+#define MAX_PIZZA 18   //the number of pizza
+
+//define Pizza
 class Pizza {
 	public:
-		void outputDescription();
-		double computePrice();
+		void outputDescription();   //display the description of the Pizza
+		double computePrice();   //return the price of the Pizza
 		void setType(int);
 		int getType();
 		void setSize(int);
@@ -13,25 +21,30 @@ class Pizza {
 		void setTopping(int);
 		int getTopping();
 	private:
-		int type;
-		int size;
-		int topping;
+		int type;   //deep dish, hand tossed, or pan
+		int size;   //small, medium, or large
+		int topping;  //one or two toppings
 };
 
 int main() {
 	Pizza user[MAX_PIZZA];
 
+	//create objects
 	for (int i = 0;i < 18;i++) {
+		//set the different value
 		user[i].setType(i / 6 + 1);
 		user[i].setSize((i % 6) / 2 + 1);
 		user[i].setTopping(i % 2 + 1);
 
+		//display the description and price
 		user[i].outputDescription();
 		cout << "\nPicee :" << user[i].computePrice() << endl;
 		cout << "-----------------------------------------\n\n";
 
 	}
 
+	system("pause");
+	return (0);
 }
 
 void Pizza::outputDescription() {
@@ -77,6 +90,8 @@ void Pizza::outputDescription() {
 		cout << "< Error >" << endl;
 	}
 }
+
+//compute the price by the formula
 double Pizza::computePrice() {
 	double price = 0;
 	switch (size) {
@@ -95,7 +110,10 @@ double Pizza::computePrice() {
 	price += topping * 2;
 	return price;
 }
+
+
 void Pizza::setType(int num) {
+	//check the value is in the range
 	if (num > 0 && num < 4) {
 		type = num;
 	}
@@ -107,6 +125,7 @@ int Pizza::getType() {
 	return type;
 }
 void Pizza::setSize(int num) {
+	//check the value is in the range
 	if (num > 0 && num < 4) {
 		size = num;
 	}
@@ -118,6 +137,7 @@ int Pizza::getSize() {
 	return size;
 }
 void Pizza::setTopping(int num) {
+	//check the value is in the range
 	if (num > 0 && num < 3) {
 		topping = num;
 	}
